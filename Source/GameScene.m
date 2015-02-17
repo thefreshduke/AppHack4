@@ -54,11 +54,6 @@ static double MAX_HOLD_TIME = 0.2;
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(hold:) userInfo:nil repeats:YES];
 }
 
--(void) hold: (NSTimer *) sendingTimer {
-    //    _seconds++;
-    //    [self update:(CCTime)];
-}
-
 - (void) setDashOrDot {
     if (arc4random_uniform(2) == 0) {
         [_dashLabel setString:(@" ")];
