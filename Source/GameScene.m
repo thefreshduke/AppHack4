@@ -29,7 +29,7 @@ static double MAX_HOLD_TIME = 0.2;
 }
 
 - (void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    _background.color = [CCColor colorWithRed:255.0f/255.0f green:130.0/255.0f blue:0.0/255.0f alpha:1.0f];
+    _background.color = [CCColor colorWithRed:255.0f/255.0f green:0.0/255.0f blue:255.0/255.0f alpha:1.0f];
     [self initHoldTimer];
 }
 
@@ -46,12 +46,18 @@ static double MAX_HOLD_TIME = 0.2;
         }
         [_timer invalidate];
     }
+    _seconds = 0.0;
     [self setDashOrDot];
 }
 
 - (void) initHoldTimer {
-    _seconds = 0;
+    _seconds = 0.0;
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(hold:) userInfo:nil repeats:YES];
+}
+
+-(void) hold: (NSTimer *) sendingTimer {
+    //    _seconds++;
+    //    [self update:(CCTime)];
 }
 
 - (void) setDashOrDot {
@@ -65,12 +71,16 @@ static double MAX_HOLD_TIME = 0.2;
     }
 }
 
-- (void) changeBackgroundColor {
-    
+- (void) updateBackgroundColor {
+    CGFloat redness = (4.0 * pow(_seconds, 2.0)) - (4.0 * _seconds) + 1.0;
+    CGFloat greenness = (-4.0 * pow(_seconds, 2.0)) + (4.0 * _seconds);
+    CGFloat blueness = (-2.0 * _seconds) + 1.0;
+    _background.color = [CCColor colorWithRed:redness green:greenness blue:blueness alpha:1.0f];
 }
 
 -(void) update: (CCTime) delta {
     _seconds += delta;
+    [self updateBackgroundColor];
 }
 
 - (void) loadMainScene {
