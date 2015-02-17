@@ -55,8 +55,8 @@ static double MAX_HOLD_TIME = 0.2;
 }
 
 -(void) hold: (NSTimer *) sendingTimer {
-//    _seconds++;
-//    [self update:(CCTime)];
+    //    _seconds++;
+    //    [self update:(CCTime)];
 }
 
 - (void) setDashOrDot {
