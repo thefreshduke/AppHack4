@@ -125,12 +125,11 @@ static NSString *blank = @" ";
     self.userInteractionEnabled = NO;
     _background.color = [CCColor colorWithRed: 1.0 green: 0.0 blue: 0.0 alpha: 1.0f];
     NSLog(@"Your score is %d", _score);
-//    [self setHighScore];
+    [self setHighScore];
 //    [_recapScene setScore: _score];
 //    [self scheduleOnce: @selector(loadRecapScene) delay: 1.0];
     [_timer invalidate];
     
-//    [self setHighScore];
     RecapScene *recapScene = (RecapScene*) [CCBReader load:@"RecapScene"];
     [recapScene setScore: self->_score];
     CCScene *newScene = [CCScene node];
@@ -139,15 +138,15 @@ static NSString *blank = @" ";
     [[CCDirector sharedDirector] presentScene:newScene withTransition:transition];
 }
 
-//- (void) setHighScore {
-//    if (![[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]) {
-//        [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
-//    }
-//    else if (_score > [[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]){
+- (void) setHighScore {
+    if (![[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]) {
+        [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
+    }
+    else if (_score > [[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]){
 //        highScore = true;
-//        [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
-//    }
-//}
+        [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
+    }
+}
 
 - (void) loadMainScene {
     CCScene *mainScene = [CCBReader loadAsScene: @"MainScene"];
