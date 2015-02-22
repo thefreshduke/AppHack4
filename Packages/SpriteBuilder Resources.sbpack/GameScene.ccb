@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>24</integer>
+	<integer>27</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -62,7 +62,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string></string>
+						<string>background</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -74,8 +74,8 @@
 							<real>0.0</real>
 							<real>0.0</real>
 							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -112,7 +112,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -122,9 +122,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.20999999344348907</real>
-							<real>0.64999997615814209</real>
-							<real>0.87000000476837158</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -203,7 +203,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.10000000149011612</real>
+							<real>0.44699999690055847</real>
 						</array>
 					</dict>
 					<dict>
@@ -216,7 +216,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -236,7 +236,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>AmericanTypewriter</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -245,7 +245,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>200</real>
+							<real>1000</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -423,7 +423,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -452,7 +452,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>300</real>
+							<real>550</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -572,7 +572,7 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>15</integer>
+				<integer>16</integer>
 				<key>baseClass</key>
 				<string>CCButton</string>
 				<key>children</key>
@@ -580,9 +580,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>loadMainSceneButton</string>
+				<string>loadRecapSceneButton</string>
 				<key>memberVarAssignmentName</key>
-				<string>_loadMainSceneButton</string>
+				<string>_loadRecapSceneButton</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -593,7 +593,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>loadMainSceneButton</string>
+						<string>loadRecapSceneButton</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -603,7 +603,7 @@
 						<key>value</key>
 						<array>
 							<real>0.10000000149011612</real>
-							<real>0.10000000149011612</real>
+							<real>0.20000000298023224</real>
 							<integer>2</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -630,7 +630,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -640,7 +640,7 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>loadMainScene</string>
+							<string>loadRecapScene</string>
 							<integer>1</integer>
 						</array>
 					</dict>
@@ -685,7 +685,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>MAIN</string>
+							<string>RECAP</string>
 							<false/>
 						</array>
 					</dict>
@@ -898,7 +898,7 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>16</integer>
+				<integer>15</integer>
 				<key>baseClass</key>
 				<string>CCButton</string>
 				<key>children</key>
@@ -906,9 +906,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>loadRecapSceneButton</string>
+				<string>loadMainSceneButton</string>
 				<key>memberVarAssignmentName</key>
-				<string>_loadRecapSceneButton</string>
+				<string>_loadMainSceneButton</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -919,7 +919,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>loadRecapSceneButton</string>
+						<string>loadMainSceneButton</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -929,7 +929,7 @@
 						<key>value</key>
 						<array>
 							<real>0.10000000149011612</real>
-							<real>0.20000000298023224</real>
+							<real>0.10000000149011612</real>
 							<integer>2</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -956,7 +956,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -966,7 +966,7 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>loadRecapScene</string>
+							<string>loadMainScene</string>
 							<integer>1</integer>
 						</array>
 					</dict>
@@ -1011,7 +1011,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>RECAP</string>
+							<string>MAIN</string>
 							<false/>
 						</array>
 					</dict>
@@ -1282,7 +1282,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1292,7 +1292,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>GAME SCENE</string>
+							<string></string>
 							<false/>
 						</array>
 					</dict>

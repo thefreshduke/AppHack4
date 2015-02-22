@@ -10,7 +10,7 @@
 #import "GameScene.h"
 
 @implementation MainScene {
-    
+    CCNodeGradient *_background;
 }
 
 - (void)loadGameScene {

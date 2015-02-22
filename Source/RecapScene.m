@@ -11,7 +11,7 @@
 #import "RecapScene.h"
 
 @implementation RecapScene {
-    
+    CCNodeGradient *_background;
 }
 
 - (void)loadMainScene {
