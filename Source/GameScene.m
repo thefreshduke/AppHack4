@@ -10,8 +10,8 @@
 #import "GameScene.h"
 #import "RecapScene.h"
 
-static double DOT_DASH_DELIMITER = 0.15;
-static double MAX_DELAY = 0.5;
+static double DOT_DASH_DELIMITER = 0.2;
+static double MAX_DELAY = 0.7;
 static NSString *dash = @"-";
 static NSString *dot = @".";
 static NSString *blank = @" ";
@@ -25,19 +25,14 @@ static NSString *blank = @" ";
     CCNodeGradient *_background;
     NSTimer *_timer;
     int _score;
-    BOOL _gameStarted;
 }
 
 - (void)didLoadFromCCB {
     self.userInteractionEnabled = YES;
-    _gameStarted = false;
     [self setDashOrDot];
 }
 
 - (void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    if (!_gameStarted) {
-        _gameStarted = true;
-    }
     [self initHoldTimer];
     _seconds = 0.0;
     _background.color = [CCColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0f];
