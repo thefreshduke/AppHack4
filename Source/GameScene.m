@@ -17,11 +17,13 @@ static NSString *dot = @".";
 static NSString *blank = @" ";
 
 @implementation GameScene {
+    RecapScene *_recapScene;
     CCButton *_loadMainSceneButton;
     CCButton *_loadRecapSceneButton;
     CCLabelTTF *_dashLabel;
     CCLabelTTF *_dotLabel;
     CCLabelTTF *_gameSceneLabel;
+    CCLabelTTF *_scoreLabel;
     CCNodeGradient *_background;
     NSTimer *_timer;
     int _score;
@@ -30,6 +32,29 @@ static NSString *blank = @" ";
 - (void)didLoadFromCCB {
     self.userInteractionEnabled = YES;
     [self setDashOrDot];
+    [self addObserver:self forKeyPath:@"score" options:0 context:NULL];
+    [[NSUserDefaults standardUserDefaults] addObserver:self
+                                            forKeyPath:@"highScore"
+                                               options:0
+                                               context:NULL];
+    // load high score
+    [_recapScene updateHighScore];
+    
+    _score = 0;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:@"score"]) {
+        _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long)_score];
+    }
+    else if ([keyPath isEqualToString:@"highScore"]) {
+        [_recapScene updateHighScore];
+    }
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"score"];
 }
 
 - (void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -84,6 +109,7 @@ static NSString *blank = @" ";
     if (_timer.isValid && _seconds >= MAX_DELAY) {
         [self endGame];
     }
+    _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long)_score];
 }
 
 - (void) updateBackgroundColor {
@@ -99,9 +125,21 @@ static NSString *blank = @" ";
     self.userInteractionEnabled = NO;
     _background.color = [CCColor colorWithRed: 1.0 green: 0.0 blue: 0.0 alpha: 1.0f];
     NSLog(@"Your score is %d", _score);
+//    [self setHighScore];
+    [_recapScene setScore: _score];
     [self scheduleOnce: @selector(loadRecapScene) delay: 1.0];
     [_timer invalidate];
 }
+
+//- (void) setHighScore {
+//    if (![[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]) {
+//        [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
+//    }
+//    else if (_score > [[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]){
+//        highScore = true;
+//        [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
+//    }
+//}
 
 - (void) loadMainScene {
     CCScene *mainScene = [CCBReader loadAsScene: @"MainScene"];

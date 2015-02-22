@@ -12,6 +12,19 @@
 
 @implementation RecapScene {
     CCNodeGradient *_background;
+    CCLabelTTF *_highScoreLabel;
+    CCLabelTTF *_scoreLabel;
+}
+
+- (void)setScore:(NSInteger)score {
+    //    if (!highScore) {
+    _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long)score];
+    //    } //how to shift between standard "your score/best score" and "YOU GOT A HIGH SCORE"?
+}
+
+- (void)updateHighScore {
+    NSInteger newHighScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"];
+    _highScoreLabel.string = [NSString stringWithFormat:@"%d", (int) newHighScore];
 }
 
 - (void)loadMainScene {
