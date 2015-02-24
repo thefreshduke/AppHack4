@@ -126,15 +126,17 @@ static NSString *blank = @" ";
     _background.color = [CCColor colorWithRed: 1.0 green: 0.0 blue: 0.0 alpha: 1.0f];
     NSLog(@"Your score is %d", _score);
     [self setHighScore];
+//    [self resetDefaults];
 //    [_recapScene setScore: _score];
+//    [_recapScene setScore: self->_score];
 //    [self scheduleOnce: @selector(loadRecapScene) delay: 1.0];
     [_timer invalidate];
     
-    RecapScene *recapScene = (RecapScene*) [CCBReader load:@"RecapScene"];
-    [recapScene setScore: self->_score];
+    _recapScene = (RecapScene*) [CCBReader load:@"RecapScene"];
+    [_recapScene setScore: self->_score];
     CCScene *newScene = [CCScene node];
-    [newScene addChild:recapScene];
-    CCTransition *transition = [CCTransition transitionFadeWithDuration:1.0f];
+    [newScene addChild:_recapScene];
+    CCTransition *transition = [CCTransition transitionFadeWithDuration:1.0f]; //no delay, transitions with fade???
     [[CCDirector sharedDirector] presentScene:newScene withTransition:transition];
 }
 
@@ -146,6 +148,15 @@ static NSString *blank = @" ";
 //        highScore = true;
         [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
     }
+}
+
+- (void) resetDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dictionary = [defaults dictionaryRepresentation];
+    for (id key in dictionary) {
+        [defaults removeObjectForKey: key];
+    }
+    [defaults synchronize];
 }
 
 - (void) loadMainScene {
