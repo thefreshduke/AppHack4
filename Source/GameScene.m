@@ -132,11 +132,11 @@ static NSString *blank = @" ";
 //    [self scheduleOnce: @selector(loadRecapScene) delay: 1.0];
     [_timer invalidate];
     
-    _recapScene = (RecapScene*) [CCBReader load:@"RecapScene"];
+    _recapScene = (RecapScene *) [CCBReader load: @"RecapScene"];
     [_recapScene setScore: self->_score];
-    CCScene *newScene = [CCScene node];
-    [newScene addChild:_recapScene];
-    CCTransition *transition = [CCTransition transitionFadeWithDuration:1.0f]; //no delay, transitions with fade???
+    CCScene * newScene = [CCScene node];
+    [newScene addChild: _recapScene];
+    CCTransition * transition = [CCTransition transitionFadeWithDuration:1.0f]; //no delay, transitions with fade???
     [[CCDirector sharedDirector] presentScene:newScene withTransition:transition];
 }
 
@@ -144,19 +144,10 @@ static NSString *blank = @" ";
     if (![[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]) {
         [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
     }
-    else if (_score > [[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]){
+    else if (_score > [[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"]) {
 //        highScore = true;
         [[NSUserDefaults standardUserDefaults] setInteger:_score forKey:@"HighScore"];
     }
-}
-
-- (void) resetDefaults {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dictionary = [defaults dictionaryRepresentation];
-    for (id key in dictionary) {
-        [defaults removeObjectForKey: key];
-    }
-    [defaults synchronize];
 }
 
 - (void) loadMainScene {

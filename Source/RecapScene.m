@@ -25,13 +25,23 @@
 
 - (void) setScore: (NSInteger) score {
     //    if (!highScore) {
-    _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long) score];
+    _scoreLabel.string = [NSString stringWithFormat:@"Score: %ld", (long) score];
     //    } //how to shift between standard "your score/best score" and "YOU GOT A HIGH SCORE"?
 }
 
 - (void) updateHighScore {
     NSInteger newHighScore = [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"];
-    _highScoreLabel.string = [NSString stringWithFormat: @"%d", (int) newHighScore];
+    _highScoreLabel.string = [NSString stringWithFormat: @"High score: %d", (int) newHighScore];
+}
+
+- (void) resetDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dictionary = [defaults dictionaryRepresentation];
+    for (id key in dictionary) {
+        [defaults removeObjectForKey: key];
+    }
+    [defaults synchronize];
+    [self updateHighScore];
 }
 
 - (void) loadMainScene {
