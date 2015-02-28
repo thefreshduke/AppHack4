@@ -13,6 +13,7 @@
 @implementation RecapScene {
     CCNodeGradient *_background;
     CCLabelTTF *_dashLabel;
+    CCLabelTTF *_dotLabel;
     CCLabelTTF *_highScoreLabel;
     CCLabelTTF *_scoreLabel;
     BOOL highScore;
@@ -26,7 +27,7 @@
 
 - (void) setScore: (NSInteger) score {
     //    if (!highScore) {
-    _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long) score];
+    _scoreLabel.string = [NSString stringWithFormat: @"%ld", (long) score];
     //    } //how to shift between standard "your score/best score" and "YOU GOT A HIGH SCORE"?
 }
 
@@ -47,7 +48,7 @@
 
 - (void) loadMainScene {
     CCScene *mainScene = [CCBReader loadAsScene: @"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene];
+    [[CCDirector sharedDirector] replaceScene: mainScene];
 }
 
 - (void) loadGameScene {

@@ -10,8 +10,8 @@
 
 @interface RecapScene : CCNode
 
-- (void)setScore: (NSInteger)score;
+- (void) setScore: (NSInteger) score;
 
-- (void)updateHighScore;
+- (void) updateHighScore;
 
 @end
