@@ -12,6 +12,6 @@
 
 - (void) setScore: (NSInteger) score;
 
-- (void) updateHighScore;
+- (void) updateAndDisplayHighScore;
 
 @end

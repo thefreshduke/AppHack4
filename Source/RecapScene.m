@@ -11,29 +11,28 @@
 #import "RecapScene.h"
 
 @implementation RecapScene {
+    BOOL isScoreNewHighScore;
     CCNodeGradient *_background;
     CCLabelTTF *_dashLabel;
     CCLabelTTF *_dotLabel;
     CCLabelTTF *_highScoreLabel;
     CCLabelTTF *_scoreLabel;
-    BOOL highScore;
+    CCLabelTTF *_scoreLabel2;
+    NSInteger highScore;
+    NSInteger newHighScore;
 }
 
 - (void) didLoadFromCCB {
-    highScore = false;
-    [self updateHighScore];
+    [self updateAndDisplayHighScore];
 }
-
 
 - (void) setScore: (NSInteger) score {
-    //    if (!highScore) {
-    _scoreLabel.string = [NSString stringWithFormat: @"%ld", (long) score];
-    //    } //how to shift between standard "your score/best score" and "YOU GOT A HIGH SCORE"?
+    _scoreLabel2.string = [NSString stringWithFormat: @"%ld", (long) score];
 }
 
-- (void) updateHighScore {
-    NSInteger newHighScore = [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"];
-    _highScoreLabel.string = [NSString stringWithFormat: @"High: %d", (int) newHighScore];
+- (void) updateAndDisplayHighScore {
+    highScore = [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"];
+    _highScoreLabel.string = [NSString stringWithFormat: @"%d", (int) highScore];
 }
 
 - (void) resetDefaults {
@@ -43,12 +42,7 @@
         [defaults removeObjectForKey: key];
     }
     [defaults synchronize];
-    [self updateHighScore];
-}
-
-- (void) loadMainScene {
-    CCScene *mainScene = [CCBReader loadAsScene: @"MainScene"];
-    [[CCDirector sharedDirector] replaceScene: mainScene];
+    [self updateAndDisplayHighScore];
 }
 
 - (void) loadGameScene {

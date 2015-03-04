@@ -17,16 +17,17 @@ static NSString *dot = @".";
 static NSString *blank = @" ";
 
 @implementation GameScene {
-    RecapScene *_recapScene;
-    CCButton *_loadMainSceneButton;
+    BOOL fading;
     CCButton *_loadRecapSceneButton;
     CCLabelTTF *_dashLabel;
     CCLabelTTF *_dotLabel;
     CCLabelTTF *_gameSceneLabel;
     CCLabelTTF *_scoreLabel;
     CCNodeGradient *_background;
-    NSTimer *_timer;
+    int fadeTimer;
     int _score;
+    NSTimer *_timer;
+    RecapScene *_recapScene;
 }
 
 - (void) didLoadFromCCB {
@@ -35,9 +36,8 @@ static NSString *blank = @" ";
     [self addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [[NSUserDefaults standardUserDefaults] addObserver: self forKeyPath: @"highScore" options: 0
                                                context: NULL];
-    [_recapScene updateHighScore];
-    
     _score = 0;
+    _background.color = [CCColor colorWithRed: 0.0 green: 1.0 blue: 0.0 alpha: 1.0f];
 }
 
 - (void) observeValueForKeyPath: (NSString *) keyPath ofObject: (id) object change: (NSDictionary *) change
@@ -46,9 +46,9 @@ static NSString *blank = @" ";
         _scoreLabel.string = [NSString stringWithFormat: @"%ld", (long) _score];
     }
     else if ([keyPath isEqualToString: @"highScore"]) {
-        [_recapScene updateHighScore];
+        [_recapScene updateAndDisplayHighScore];
     }
-}
+} // method seems unnecessary; no noticeable effect when commented out
 
 - (void) dealloc {
     [self removeObserver: self forKeyPath: @"score"];
@@ -58,6 +58,7 @@ static NSString *blank = @" ";
     [self initHoldTimer];
     _seconds = 0.0;
     _background.color = [CCColor colorWithRed: 1.0 green: 1.0 blue: 1.0 alpha: 1.0f];
+//    _background.color = [CCColor colorWithRed: 0.0 green: 1.0 blue: 0.0 alpha: 1.0f];
 }
 
 - (void) touchEnded: (UITouch *) touch withEvent: (UIEvent *) event {
@@ -66,7 +67,8 @@ static NSString *blank = @" ";
             (_seconds < DOT_DASH_DELIMITER && [_dotLabel.string isEqualToString: dot])) {
             _score++;
             _background.color = [CCColor colorWithRed: 0.0 green: 1.0 blue: 0.0 alpha: 1.0f];
-            _background.endOpacity -= 0.01;
+//            _background.color = [CCColor colorWithRed: 1.0 green: 1.0 blue: 1.0 alpha: 1.0f]; //test background colors changing
+            _background.endOpacity -= 0.01; //test this again
             [self setDashOrDot];
         }
         else {
@@ -87,7 +89,7 @@ static NSString *blank = @" ";
 -(void) hold: (NSTimer *) sendingTimer {
     //    _seconds++;
     //    [self update:(CCTime)];
-}
+} // only here because of the selector in initHoldTimer method above
 
 - (void) setDashOrDot {
     if (arc4random_uniform(2) == 0) {
@@ -105,6 +107,11 @@ static NSString *blank = @" ";
 //    [self updateBackgroundColor];
     if (_timer.isValid && _seconds >= MAX_DELAY) {
         [self endGame];
+    }
+    if (fading) { // how to slide score downwards for recap scene?
+        fadeTimer += delta;
+//        _scoreLabel.position.y 80 - (27.5 * fadeTimer);
+//        [_scoreLabel setPosition: (284.0f, 80 - (27.5 * fadeTimer))];
     }
     _scoreLabel.string = [NSString stringWithFormat: @"%ld", (long) _score];
 }
@@ -131,9 +138,14 @@ static NSString *blank = @" ";
     
     _recapScene = (RecapScene *) [CCBReader load: @"RecapScene"];
     [_recapScene setScore: self -> _score];
+//    [_recapScene ]
     CCScene * newScene = [CCScene node];
     [newScene addChild: _recapScene];
-    CCTransition * transition = [CCTransition transitionFadeWithDuration: 1.0f]; //no delay, transitions with fade???
+//    CCTransition * transition = [CCTransition transitionFadeWithDuration: 1.0f]; //no delay, transitions with fade???
+    [_dashLabel setString: dash];
+    [_dotLabel setString: blank];
+    CCTransition * transition = [CCTransition transitionCrossFadeWithDuration: 1.0f];
+    fading = true;
     [[CCDirector sharedDirector] presentScene:newScene withTransition:transition];
 }
 
@@ -142,19 +154,9 @@ static NSString *blank = @" ";
         [[NSUserDefaults standardUserDefaults] setInteger: _score forKey: @"HighScore"];
     }
     else if (_score > [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"]) {
-//        highScore = true;
+//        isScoreNewHighScore = true;
         [[NSUserDefaults standardUserDefaults] setInteger: _score forKey: @"HighScore"];
     }
-}
-
-- (void) loadMainScene {
-    CCScene *mainScene = [CCBReader loadAsScene: @"MainScene"];
-    [[CCDirector sharedDirector] replaceScene: mainScene];
-}
-
-- (void) loadRecapScene {
-    CCScene *recapScene = [CCBReader loadAsScene: @"RecapScene"];
-    [[CCDirector sharedDirector] replaceScene: recapScene];
 }
 
 @end
