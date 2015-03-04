@@ -17,7 +17,7 @@ static NSString *dot = @".";
 static NSString *blank = @" ";
 
 @implementation GameScene {
-    BOOL fading;
+    BOOL isGameSceneFading;
     CCButton *_loadRecapSceneButton;
     CCLabelTTF *_dashLabel;
     CCLabelTTF *_dotLabel;
@@ -65,16 +65,16 @@ static NSString *blank = @" ";
             (_seconds < DOT_DASH_DELIMITER && [_dotLabel.string isEqualToString: dot])) {
             _score++;
             _background.color = [CCColor colorWithRed: 0.0 green: 1.0 blue: 0.0 alpha: 1.0f];
-            if (_background.endOpacity > 0.0) {
-                _background.endOpacity -= 0.1; //test this again
-            }
-            if (_background.endOpacity < 0.0 && _background.startOpacity > 0.0) {
-                _background.startOpacity -= 0.1;
-            }
-            if (_background.startOpacity < 0.0) {
-                _dashLabel.opacity -= 0.1;
-            }
-            NSLog(@"end: %f --- start: %f", _background.endOpacity, _background.startOpacity);
+//            if (_background.endOpacity > 0.0) {
+//                _background.endOpacity -= 0.1; //test this again
+//            }
+//            if (_background.endOpacity < 0.0 && _background.startOpacity > 0.0) {
+//                _background.startOpacity -= 0.1;
+//            }
+//            if (_background.startOpacity < 0.0) {
+//                _dashLabel.opacity -= 0.1;
+//            }
+//            NSLog(@"end: %f --- start: %f", _background.endOpacity, _background.startOpacity);
             [self setDashOrDot];
         }
         else {
@@ -113,7 +113,7 @@ static NSString *blank = @" ";
     if (_timer.isValid && _seconds >= MAX_DELAY) {
         [self endGame];
     }
-    if (fading) { // how to slide score downwards for recap scene?
+    if (isGameSceneFading) { // how to slide score downwards for recap scene?
         fadeTimer += delta;
 //        _scoreLabel.position.y 80 - (27.5 * fadeTimer);
 //        [_scoreLabel setPosition: (284.0f, 80 - (27.5 * fadeTimer))];
@@ -126,11 +126,13 @@ static NSString *blank = @" ";
     _background.color = [CCColor colorWithRed: 1.0 green: 0.0 blue: 0.0 alpha: 1.0f];
     [self setHighScore];
     [_timer invalidate];
-    [_recapScene setScore: self -> _score];
+    
     [_dashLabel setString: dash];
     [_dotLabel setString: blank];
-    fading = true;
+    isGameSceneFading = true;
+    
     _recapScene = (RecapScene *) [CCBReader load: @"RecapScene"];
+    [_recapScene setScore: self -> _score];
     CCScene * newScene = [CCScene node];
     [newScene addChild: _recapScene];
     CCTransition * transition = [CCTransition transitionCrossFadeWithDuration: 1.0f];
@@ -138,11 +140,7 @@ static NSString *blank = @" ";
 }
 
 - (void) setHighScore {
-    if (![[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"]) {
-        [[NSUserDefaults standardUserDefaults] setInteger: _score forKey: @"HighScore"];
-    }
-    else if (_score > [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"]) {
-//        isScoreNewHighScore = true;
+    if (![[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"] || _score > [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"]) {
         [[NSUserDefaults standardUserDefaults] setInteger: _score forKey: @"HighScore"];
     }
 }
