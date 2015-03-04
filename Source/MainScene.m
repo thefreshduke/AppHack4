@@ -17,14 +17,11 @@
 }
 
 - (void) loadGameScene {
-    _background.color = [CCColor colorWithRed: 0.0 green: 1.0 blue: 0.0 alpha: 1.0f];
     _gameScene = (GameScene *) [CCBReader load: @"GameScene"];
     CCScene * newScene = [CCScene node];
     [newScene addChild: _gameScene];
     CCTransition * transition = [CCTransition transitionCrossFadeWithDuration: 1.0f];
     [[CCDirector sharedDirector] presentScene:newScene withTransition:transition];
-//    CCScene *gameScene = [CCBReader loadAsScene: @"GameScene"];
-//    [[CCDirector sharedDirector] replaceScene: gameScene];
 } // fades slower than GameScene.m?
 
 @end
