@@ -23,7 +23,6 @@ static NSString *highScoreMessage = @"HIGH SCORE";
     CCLabelTTF *_dashLabel;
     CCLabelTTF *_dotLabel;
     CCLabelTTF *_gameSceneLabel;
-//    CCLabelTTF *_highLabel;
     CCLabelTTF *_scoreLabel;
     CCNodeGradient *_background;
     int fadeTimer;
@@ -122,9 +121,6 @@ static NSString *highScoreMessage = @"HIGH SCORE";
     }
     
     [_scoreLabel setString: [NSString stringWithFormat: @"%ld", (long) _score]];
-//    if (_score > [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"]) {
-//        [_highLabel setString: [NSString stringWithFormat: @"%@", highScoreMessage]];
-//    }
 }
 
 - (void) endGame {

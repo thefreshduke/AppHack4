@@ -34,18 +34,15 @@ static NSString *highScoreMessage = @"HIGH SCORE";
 - (void) setScore: (NSInteger) score {
     NSLog(@"%ld, %ld", (long)score, (long) highScore);
     if (score == highScore) {
-//        [_scoreLabel setString: [NSString stringWithFormat: @"%@", highScoreMessage]];
         [_highLabel setString: [NSString stringWithFormat: @"%@", newHighMessage]];
     }
     else {
-//    if (score < highScore) {
         [_highLabel setString: [NSString stringWithFormat: @"%@", highScoreMessage]];
         [_scoreLabel setString: [NSString stringWithFormat: @"%ld", (long) score]];
     }
 }
 
 - (void) updateAndDisplayHighScore {
-//    highScore = [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"];
     [_highScoreLabel setString: [NSString stringWithFormat: @"%ld", (long) highScore]];
 }
 
