@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>12</integer>
+	<integer>13</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -228,7 +228,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.25</real>
+							<real>0.30000001192092896</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -427,7 +427,7 @@
 				<key>displayName</key>
 				<string>playLabel</string>
 				<key>memberVarAssignmentName</key>
-				<string>_dotLabel</string>
+				<string></string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -438,7 +438,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>dotLabel</string>
+						<string>playLabel</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -448,7 +448,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.25</real>
+							<real>0.30000001192092896</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -668,7 +668,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.54000002145767212</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1230,8 +1230,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1243,7 +1241,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>mainSceneLabel</string>
+				<string>gameNameLabel</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -1256,7 +1254,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>mainSceneLabel</string>
+						<string>gameNameLabel</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1303,7 +1301,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>S'MORES CODE</string>
+							<string>GAME NAME</string>
 							<false/>
 						</array>
 					</dict>
@@ -1342,8 +1340,8 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.10196078568696976</real>
+							<real>0.34117648005485535</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1409,7 +1407,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>0.0</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1433,7 +1431,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>2</real>
+							<real>0.0</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1445,13 +1443,15 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>-2</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

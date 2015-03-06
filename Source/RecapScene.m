@@ -10,29 +10,43 @@
 #import "GameScene.h"
 #import "RecapScene.h"
 
+static NSString *newHighMessage = @"NEW HIGH SCORE";
+static NSString *highScoreMessage = @"HIGH SCORE";
+
 @implementation RecapScene {
     BOOL isScoreNewHighScore;
     CCNodeGradient *_background;
+    CCLabelTTF *_achievementLabel;
     CCLabelTTF *_dashLabel;
     CCLabelTTF *_dotLabel;
+    CCLabelTTF *_highLabel;
     CCLabelTTF *_highScoreLabel;
     CCLabelTTF *_scoreLabel;
-    CCLabelTTF *_scoreLabel2;
     NSInteger highScore;
     NSInteger newHighScore;
 }
 
 - (void) didLoadFromCCB {
+    highScore = [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"];
     [self updateAndDisplayHighScore];
 }
 
 - (void) setScore: (NSInteger) score {
-    _scoreLabel2.string = [NSString stringWithFormat: @"%ld", (long) score];
+    NSLog(@"%ld, %ld", (long)score, (long) highScore);
+    if (score == highScore) {
+//        [_scoreLabel setString: [NSString stringWithFormat: @"%@", highScoreMessage]];
+        [_highLabel setString: [NSString stringWithFormat: @"%@", newHighMessage]];
+    }
+    else {
+//    if (score < highScore) {
+        [_highLabel setString: [NSString stringWithFormat: @"%@", highScoreMessage]];
+        [_scoreLabel setString: [NSString stringWithFormat: @"%ld", (long) score]];
+    }
 }
 
 - (void) updateAndDisplayHighScore {
-    highScore = [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"];
-    _highScoreLabel.string = [NSString stringWithFormat: @"%d", (int) highScore];
+//    highScore = [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"];
+    [_highScoreLabel setString: [NSString stringWithFormat: @"%ld", (long) highScore]];
 }
 
 - (void) resetDefaults {

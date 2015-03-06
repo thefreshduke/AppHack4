@@ -15,6 +15,7 @@ static double MAX_DELAY = 0.7; //0.7
 static NSString *dash = @"-";
 static NSString *dot = @".";
 static NSString *blank = @" ";
+static NSString *highScoreMessage = @"HIGH SCORE";
 
 @implementation GameScene {
     BOOL isGameSceneFading;
@@ -22,6 +23,7 @@ static NSString *blank = @" ";
     CCLabelTTF *_dashLabel;
     CCLabelTTF *_dotLabel;
     CCLabelTTF *_gameSceneLabel;
+//    CCLabelTTF *_highLabel;
     CCLabelTTF *_scoreLabel;
     CCNodeGradient *_background;
     int fadeTimer;
@@ -42,7 +44,7 @@ static NSString *blank = @" ";
 - (void) observeValueForKeyPath: (NSString *) keyPath ofObject: (id) object change: (NSDictionary *) change
                        context: (void *) context {
     if ([keyPath isEqualToString: @"score"]) {
-        _scoreLabel.string = [NSString stringWithFormat: @"%ld", (long) _score];
+        [_scoreLabel setString: [NSString stringWithFormat: @"%ld", (long) _score]];
     }
     else if ([keyPath isEqualToString: @"highScore"]) {
         [_recapScene updateAndDisplayHighScore];
@@ -118,7 +120,11 @@ static NSString *blank = @" ";
 //        _scoreLabel.position.y 80 - (27.5 * fadeTimer);
 //        [_scoreLabel setPosition: (284.0f, 80 - (27.5 * fadeTimer))];
     }
-    _scoreLabel.string = [NSString stringWithFormat: @"%ld", (long) _score];
+    
+    [_scoreLabel setString: [NSString stringWithFormat: @"%ld", (long) _score]];
+//    if (_score > [[NSUserDefaults standardUserDefaults] integerForKey: @"HighScore"]) {
+//        [_highLabel setString: [NSString stringWithFormat: @"%@", highScoreMessage]];
+//    }
 }
 
 - (void) endGame {
